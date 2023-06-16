@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { lazy, Suspense, useEffect } from 'react'
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useRoutes,
+  useNavigate
+} from 'react-router-dom'
+import RouteConfig from 'configs/route'
+
+const Login = lazy(() => import('pages/Login'))
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '*',
+      element: <InnerRouter />
+    },
+    {
+      path: 'login',
+      element: <Login />
+    }
+    // {
+    //   path: '/logout',
+    //   element: <Suspense fallback={null}>{/* <Logout/> */}</Suspense>
+    // }
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <RouterProvider
+      router={router}
+      // fallbackElement={<div>Router is loading</div>}
+    />
+  )
 }
 
-export default App;
+export default App
+
+const InnerRouter = () => {
+  const navigate = useNavigate()
+  useEffect(() => {
+    // if no login token
+    navigate('/login')
+  }, [])
+  const routes = useRoutes(RouteConfig)
+  return (
+    <div>
+      Navbar
+      {routes}
+    </div>
+  )
+}
