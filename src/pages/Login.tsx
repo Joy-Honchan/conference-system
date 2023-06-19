@@ -1,7 +1,10 @@
+import { useTheme, Typography } from "@mui/material";
+
 const Login =()=>{
+    const theme = useTheme()
     return(
         <div>
-            <h1>Login</h1>
+            <Typography variant="h1" sx={{ color:theme.palette.danger.main}} >Login</Typography>
         </div>
     )
 }

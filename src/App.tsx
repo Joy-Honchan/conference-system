@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom'
 import RouteConfig from 'configs/route'
 
+import ThemeProvider from 'providers/ThemeProvider'
+
 const Login = lazy(() => import('pages/Login'))
 
 function App() {
@@ -25,10 +27,12 @@ function App() {
     // }
   ])
   return (
-    <RouterProvider
-      router={router}
-      // fallbackElement={<div>Router is loading</div>}
-    />
+    <ThemeProvider>
+      <RouterProvider
+        router={router}
+        // fallbackElement={<div>Router is loading</div>}
+      />
+    </ThemeProvider>
   )
 }
 
