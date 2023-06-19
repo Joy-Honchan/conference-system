@@ -7,7 +7,10 @@ import {
 } from 'react-router-dom'
 import RouteConfig from 'configs/route'
 
+//ThemeProvider
 import ThemeProvider from 'providers/ThemeProvider'
+
+import TemplatWithNavebar from 'components/Navbar'
 
 const Login = lazy(() => import('pages/Login'))
 
@@ -40,15 +43,10 @@ export default App
 
 const InnerRouter = () => {
   const navigate = useNavigate()
-  useEffect(() => {
-    // if no login token
-    navigate('/login')
-  }, [])
+  // useEffect(() => {
+  //   // if no login token
+  //   navigate('/login')
+  // }, [])
   const routes = useRoutes(RouteConfig)
-  return (
-    <div>
-      Navbar
-      {routes}
-    </div>
-  )
+  return <TemplatWithNavebar>{routes}</TemplatWithNavebar>
 }
