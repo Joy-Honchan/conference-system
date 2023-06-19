@@ -1,16 +1,25 @@
 // import { CSSProperties } from 'react'
 import { Theme } from '@mui/material/styles'
 
-declare module '@mui/material/styles'{
-    interface Palette {
-        danger: {
-            main:string
-        }
-    }
+interface PaletteOptionType {
+    lightest?: string
+    lighter?: string
+    darker?: string
+    darkest?: string
+}
 
-    interface PaletteOptions {
-        danger: {
-            main:string
-        }
-    }
+declare module '@mui/material/styles'{
+    // interface Palette {
+    //     danger: {
+    //         main:string
+    //     }
+    // }
+
+    // interface PaletteOptions {
+    //     danger: {
+    //         main:string
+    //     }
+    // }
+    interface PaletteColor extends PaletteOptionType {}
+    interface SimplePaletteColorOptions extends PaletteOptionType {}
 }
