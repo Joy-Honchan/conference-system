@@ -9,6 +9,8 @@ import RouteConfig from 'configs/route'
 
 //ThemeProvider
 import ThemeProvider from 'providers/ThemeProvider'
+//NotistackProvider
+import NotistackProvider from 'providers/NotistackProvider'
 
 import TemplatWithNavebar from 'components/Navbar'
 
@@ -31,10 +33,12 @@ function App() {
   ])
   return (
     <ThemeProvider>
-      <RouterProvider
-        router={router}
-        // fallbackElement={<div>Router is loading</div>}
-      />
+      <NotistackProvider>
+        <RouterProvider
+          router={router}
+          // fallbackElement={<div>Router is loading</div>}
+        />
+      </NotistackProvider>
     </ThemeProvider>
   )
 }
