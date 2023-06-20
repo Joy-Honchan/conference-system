@@ -29,18 +29,33 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       createTheme({
         palette: {
           mode,
-          primary:{
-                  lighter: cyan[200],
-                  light: cyan[300],
-                  main: cyan[500],
-                  dark: cyan[700],
-                  darker: cyan[800]
-                },
+          primary: {
+            lighter: cyan[200],
+            light: cyan[300],
+            main: cyan[500],
+            dark: cyan[700],
+            darker: cyan[800]
+          },
+          text:
+            mode === 'light'
+              ? {
+                  primary: grey[800]
+                }
+              : { primary: grey[300] },
           ...(mode === 'dark' && {
             background: {
               default: grey[800]
             }
           })
+        },
+        components: {
+          MuiButton: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                color: theme.palette.text.primary
+              })
+            }
+          }
         }
       }),
     [mode]

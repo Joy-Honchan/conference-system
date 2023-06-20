@@ -10,17 +10,20 @@ import Button from '@mui/material/Button'
 const MenuIcon = React.lazy(() => import('@mui/icons-material/Menu'))
 const LogoutIcon = React.lazy(() => import('@mui/icons-material/Logout'))
 
-export default function TopManu() {
+export default function TopManu({
+  onClick
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>
+}) {
   return (
-    <AppBar position="static">
+    <AppBar
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, boxShadow: 'none' }}
+    >
       <ToolBar>
-        <IconButton sx={{ mr: 2 }}>
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h4" component='div' sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
           TopManu
         </Typography>
-        <Button startIcon={<LogoutIcon/>}>Logout</Button>
+        <Button startIcon={<LogoutIcon />}>Logout</Button>
       </ToolBar>
     </AppBar>
   )
