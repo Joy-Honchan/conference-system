@@ -6,13 +6,14 @@ import {
   useNavigate
 } from 'react-router-dom'
 import RouteConfig from 'configs/route'
+import TemplatWithNavebar from 'components/Navbar'
 
 //ThemeProvider
 import ThemeProvider from 'providers/ThemeProvider'
 //NotistackProvider
 import NotistackProvider from 'providers/NotistackProvider'
-
-import TemplatWithNavebar from 'components/Navbar'
+//SWRQueryProvider
+import SWRQueryProvider from 'providers/SWRQueryProvider'
 
 const Login = lazy(() => import('pages/Login'))
 
@@ -32,14 +33,16 @@ function App() {
     // }
   ])
   return (
-    <ThemeProvider>
-      <NotistackProvider>
-        <RouterProvider
-          router={router}
-          // fallbackElement={<div>Router is loading</div>}
-        />
-      </NotistackProvider>
-    </ThemeProvider>
+    <SWRQueryProvider>
+      <ThemeProvider>
+        <NotistackProvider>
+          <RouterProvider
+            router={router}
+            // fallbackElement={<div>Router is loading</div>}
+          />
+        </NotistackProvider>
+      </ThemeProvider>
+    </SWRQueryProvider>
   )
 }
 
