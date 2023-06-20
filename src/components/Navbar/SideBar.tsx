@@ -25,7 +25,7 @@ const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'Room Status': <MeetingRoomIcon />,
   'Future Vacancy': <AccessTimeIcon />,
   'Form Meeting': <EditCalendarIcon />,
-  'My Scheule': <PersonIcon />
+  'My Schedule': <PersonIcon />
 }
 
 export default function SideBar({ open, setClose }: SideBarProps) {
