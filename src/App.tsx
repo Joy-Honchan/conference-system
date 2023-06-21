@@ -14,6 +14,9 @@ import ThemeProvider from 'providers/ThemeProvider'
 import NotistackProvider from 'providers/NotistackProvider'
 //SWRQueryProvider
 import SWRQueryProvider from 'providers/SWRQueryProvider'
+//Redux
+import { Provider } from 'react-redux'
+import store from 'store'
 
 const Login = lazy(() => import('pages/Login'))
 
@@ -33,16 +36,18 @@ function App() {
     // }
   ])
   return (
-    <SWRQueryProvider>
-      <ThemeProvider>
-        <NotistackProvider>
-          <RouterProvider
-            router={router}
-            // fallbackElement={<div>Router is loading</div>}
-          />
-        </NotistackProvider>
-      </ThemeProvider>
-    </SWRQueryProvider>
+    <Provider store={store}>
+      <SWRQueryProvider>
+        <ThemeProvider>
+          <NotistackProvider>
+            <RouterProvider
+              router={router}
+              // fallbackElement={<div>Router is loading</div>}
+            />
+          </NotistackProvider>
+        </ThemeProvider>
+      </SWRQueryProvider>
+    </Provider>
   )
 }
 
