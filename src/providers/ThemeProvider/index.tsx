@@ -39,9 +39,10 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           text:
             mode === 'light'
               ? {
-                  primary: grey[800]
+                  primary: grey[800],
+                  contrast: grey[300]
                 }
-              : { primary: grey[300] },
+              : { primary: grey[300], contrast: grey[800] },
           ...(mode === 'dark' && {
             background: {
               default: grey[800]
