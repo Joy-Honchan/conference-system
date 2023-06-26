@@ -8,7 +8,7 @@ import {
 } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-const ColorModeContext = createContext({
+export const ColorModeContext = createContext({
   toggleColorMode: () => {}
 })
 
@@ -52,7 +52,10 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         components: {
           MuiButton: {
             styleOverrides: {
-              root: ({ theme }) => ({
+              root: ({ ownerState, theme }) => ({
+                // ...(ownerState.className === 'btn' && {
+                //   backgroundColor: 'red'
+                // }),
                 color: theme.palette.text.primary
               })
             }

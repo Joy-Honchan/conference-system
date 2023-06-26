@@ -1,12 +1,25 @@
-import { useTheme, Typography, Box, Paper, Button } from '@mui/material'
+import {
+  useTheme,
+  Typography,
+  Box,
+  Paper,
+  Button,
+  IconButton
+} from '@mui/material'
 import { notifySuccess, notifyError } from 'utils/notify'
 import useSWR from 'swr'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
+import Switch from '@mui/material/Switch/Switch'
 import { useAppSelector, useAppDispatch } from 'hooks/reduxHooks'
 import { addTodo } from 'store/slices/todoSlice'
+import { ColorModeContext } from 'providers/ThemeProvider'
+
+import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
+import { useContext, useEffect } from 'react'
 
 interface UserSWRType {
   id: string
@@ -16,6 +29,9 @@ const Login = () => {
   const theme = useTheme()
   // const { data, error } = useSWR<UserSWRType>('/user')
   const dispatch = useAppDispatch()
+  const handleColorMode = useContext(ColorModeContext).toggleColorMode
+  // const user = { name: 'john' }
+  // useEffect(() => console.log('user changed'), [user])
 
   const formik = useFormik({
     initialValues: {
@@ -51,6 +67,7 @@ const Login = () => {
       )} */}
       <Button onClick={() => notifySuccess('Success')}>Success</Button>
       <Button onClick={() => notifyError('Error')}>Error</Button>
+      {/* <Button className="btn">Button</Button> */}
       <form onSubmit={formik.handleSubmit}>
         <input
           type="text"
@@ -73,6 +90,12 @@ const Login = () => {
           </ListItem>
         ))}
       </List>
+      <Switch
+        checked={theme.palette.mode === 'light'}
+        icon={<DarkModeIcon fontSize="small" />}
+        checkedIcon={<LightModeIcon fontSize="small" />}
+        onChange={handleColorMode}
+      />
     </Box>
   )
 }
