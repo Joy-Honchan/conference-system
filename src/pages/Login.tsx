@@ -1,103 +1,90 @@
-import {
-  useTheme,
-  Typography,
-  Box,
-  Paper,
-  Button,
-  IconButton
-} from '@mui/material'
-import { notifySuccess, notifyError } from 'utils/notify'
-import useSWR from 'swr'
+import React from 'react'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import Switch from '@mui/material/Switch/Switch'
-import { useAppSelector, useAppDispatch } from 'hooks/reduxHooks'
-import { addTodo } from 'store/slices/todoSlice'
-import { ColorModeContext } from 'providers/ThemeProvider'
+import * as Yup from 'yup'
+import {
+  Box,
+  Button,
+  Paper,
+  Stack,
+  TextField,
+  styled,
+  Typography,
+  Divider
+} from '@mui/material'
+import meetingPic from 'assets/undraw_meeting_re_i53h.svg'
 
-import DarkModeIcon from '@mui/icons-material/DarkMode'
-import LightModeIcon from '@mui/icons-material/LightMode'
-import { useContext, useEffect } from 'react'
-
-interface UserSWRType {
-  id: string
-  name: string
-}
-const Login = () => {
-  const theme = useTheme()
-  // const { data, error } = useSWR<UserSWRType>('/user')
-  const dispatch = useAppDispatch()
-  const handleColorMode = useContext(ColorModeContext).toggleColorMode
-  // const user = { name: 'john' }
-  // useEffect(() => console.log('user changed'), [user])
-
+function Login() {
   const formik = useFormik({
     initialValues: {
-      title: ''
+      username: 'admin',
+      password: 'aaaa'
     },
-    validationSchema: yup.object({
-      title: yup.string().required()
+    validationSchema: Yup.object({
+      username: Yup.string().required(),
+      password: Yup.string().required()
     }),
     onSubmit: (values) => {
-      // console.log(values)
-      try {
-        dispatch(addTodo(values))
-        notifySuccess('Success')
-      } catch (error) {
-        notifyError('Error')
-      }
+      console.log('value', values)
     }
   })
-  const todoList = useAppSelector((state) => state.todo)
   return (
-    <Box sx={{ backgroundColor: theme.palette.background.default }}>
-      <Paper> Hello</Paper>
-      <Typography variant="h1" sx={{ color: theme.palette.primary.main }}>
-        Login
-      </Typography>
-      <Typography variant="h2" sx={{ color: theme.palette.primary.darker }}>
-        Login
-      </Typography>
-      {/* {data && (
-        <Typography variant="h3" sx={{ color: theme.palette.primary.main }}>
-          {data.name}
-        </Typography>
-      )} */}
-      <Button onClick={() => notifySuccess('Success')}>Success</Button>
-      <Button onClick={() => notifyError('Error')}>Error</Button>
-      {/* <Button className="btn">Button</Button> */}
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          onChange={formik.handleChange}
-          value={formik.values.title}
-        />
-        <button type="submit">Submit</button>
-      </form>
-      <List>
-        {todoList.map((item) => (
-          <ListItem
-            sx={{
-              color: theme.palette.text.contrast,
-              backgroundColor: item.completed ? 'green' : 'red'
-            }}
-            key={item.id}
-          >
-            {item.title}
-          </ListItem>
-        ))}
-      </List>
-      <Switch
-        checked={theme.palette.mode === 'light'}
-        icon={<DarkModeIcon fontSize="small" />}
-        checkedIcon={<LightModeIcon fontSize="small" />}
-        onChange={handleColorMode}
-      />
-    </Box>
+    <StyleWrapper>
+      <Paper className="center-paper">
+        <Box className="meetingPic-container">
+          <img src={meetingPic} alt="meeting" />
+        </Box>
+        <Paper className="input-section">
+          <Stack component="form" spacing={5} onSubmit={formik.handleSubmit}>
+            <Box>
+              <Typography variant="h5">Conference System</Typography>
+              <Divider />
+            </Box>
+            <TextField id="username" label="Username" />
+            <TextField id="password" label="Password" type="password" />
+            <Button type="submit">Login</Button>
+          </Stack>
+        </Paper>
+      </Paper>
+    </StyleWrapper>
   )
 }
+
+const StyleWrapper = styled('main')(({ theme }) => ({
+  width: '100vw',
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '.center-paper': {
+    flexGrow: 1,
+    display: 'flex',
+    margin: theme.spacing(8),
+    maxWidth: 1300,
+    '.meetingPic-container': {
+      flexGrow: 1,
+      padding: theme.spacing(8),
+      img: {
+        width: '100%'
+      }
+    },
+    '.input-section': {
+      flex: '0 0 250px',
+      padding: theme.spacing(5)
+    }
+  },
+
+  // '.input-section': {
+  //   marginTop: theme.spacing(5),
+  //   padding: theme.spacing(5)
+  // }
+  [theme.breakpoints.down('md')]: {
+    '.center-paper': {
+      display: 'block',
+      '.meetingPic-container': {
+        display: 'none'
+      }
+    }
+  }
+}))
 
 export default Login
