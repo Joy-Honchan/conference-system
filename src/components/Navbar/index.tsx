@@ -1,7 +1,7 @@
-import { useState, ReactNode} from 'react'
-
+import { useState, ReactNode } from 'react'
+import { Box, CssBaseline, Toolbar } from '@mui/material'
 import SideBar from './SideBar'
-import TopManu from './TopManu'
+import TopMenu from './TopMenu'
 
 export default function TemplatWithNavebar({
   children
@@ -17,10 +17,14 @@ export default function TemplatWithNavebar({
     setSideBarOpen(false)
   }
   return (
-    <>
-      <TopManu onClick={handleMenuIconClick}/>
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <TopMenu />
       <SideBar open={sidBarOpen} setClose={handleSidebarClose} />
-      {children}
-    </>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Toolbar />
+        {children}
+      </Box>
+    </Box>
   )
 }

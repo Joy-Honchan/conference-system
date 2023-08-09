@@ -39,13 +39,21 @@ export default function SideBar({ open, setClose }: SideBarProps) {
     }
   }
   return (
-    <Drawer anchor="left" open={open} onClose={setClose} variant="permanent">
+    <Drawer
+      variant="permanent"
+      sx={{
+        width: 240,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: {
+          width: 240,
+          boxSizing: 'border-box'
+        }
+      }}
+    >
       <Toolbar />
       <List
         sx={{
           width: '100%',
-          minWidth: 250,
-          maxWidth: 480,
           bgcolor: 'background.paper',
           pt: 0
         }}
