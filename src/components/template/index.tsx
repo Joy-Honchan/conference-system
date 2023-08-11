@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react'
+import { useState, ReactNode, ReactElement } from 'react'
 import { Box, CssBaseline, Toolbar } from '@mui/material'
 import SideBar from './SideBar'
 import TopMenu from './TopMenu'
