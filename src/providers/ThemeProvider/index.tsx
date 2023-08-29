@@ -55,6 +55,15 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
                 color: theme.palette.text.primary
               })
             }
+          },
+          MuiListItemButton: {
+            styleOverrides: {
+              root: ({ theme }) => ({
+                '&:not(:last-child)': {
+                  marginBottom: theme.spacing(1)
+                }
+              })
+            }
           }
         }
       }),

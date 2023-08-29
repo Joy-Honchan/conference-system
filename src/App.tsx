@@ -10,7 +10,7 @@ import RouteConfig from 'configs/route'
 //ThemeProvider
 import ThemeProvider from 'providers/ThemeProvider'
 
-import TemplatWithNavebar from 'components/Navbar'
+import TemplatWithNavebar from 'components/template'
 
 const Login = lazy(() => import('pages/Login'))
 
