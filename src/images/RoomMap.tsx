@@ -22,9 +22,10 @@ const RoomMap = ({
 }: Room_mapProps) => {
   return (
     <svg
-      width="974"
-      height="636"
+      width="inherit"
+      height="inherit"
       viewBox="0 0 974 636"
+      preserveAspectRatio="xMidYMin meet"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -35,7 +36,7 @@ const RoomMap = ({
         height="633"
         rx="3.5"
         stroke="black"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <rect
         x="43"

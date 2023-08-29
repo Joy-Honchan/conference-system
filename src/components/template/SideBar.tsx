@@ -77,7 +77,13 @@ export default function SideBar({ children }: { children: ReactNode }) {
       </Drawer>
       <Box
         component="main"
-        sx={{ p: 3, display: 'flex', flexDirection: 'column', flexGrow: 1 }}
+        sx={{
+          p: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          flexWrap: 'wrap'
+        }}
       >
         <Toolbar />
         {RouteConfig[selectedId].pageTitle ? (
