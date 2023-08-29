@@ -15,6 +15,7 @@ const MeetingRoomIcon = lazy(() => import('@mui/icons-material/MeetingRoom'))
 const AccessTimeIcon = lazy(() => import('@mui/icons-material/AccessTime'))
 const EditCalendarIcon = lazy(() => import('@mui/icons-material/EditCalendar'))
 const PersonIcon = lazy(() => import('@mui/icons-material/Person'))
+const DashboardIcon = lazy(() => import('@mui/icons-material/Dashboard'))
 
 interface SideBarProps {
   open: boolean
@@ -25,7 +26,8 @@ const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'Room Status': <MeetingRoomIcon />,
   'Future Vacancy': <AccessTimeIcon />,
   'Form Meeting': <EditCalendarIcon />,
-  'My Schedule': <PersonIcon />
+  'My Schedule': <PersonIcon />,
+  Dashboard: <DashboardIcon />
 }
 
 export default function SideBar({ open, setClose }: SideBarProps) {
@@ -54,8 +56,7 @@ export default function SideBar({ open, setClose }: SideBarProps) {
       <List
         sx={{
           width: '100%',
-          bgcolor: 'background.paper',
-          pt: 0
+          bgcolor: 'background.paper'
         }}
         component="nav"
         aria-labelledby="nested-list-subheader"

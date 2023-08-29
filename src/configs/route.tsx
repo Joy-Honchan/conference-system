@@ -7,6 +7,7 @@ const RoomStatus = lazy(() => import('pages/RoomStatus'))
 const FutureVacancy = lazy(() => import('pages/FutureVacancy'))
 const FormMeeting = lazy(() => import('pages/FormMeeting'))
 const MySchedule = lazy(() => import('pages/MySchedule'))
+const Dashboard = lazy(() => import('pages/Dashboard'))
 
 const RouteConfig: RouteItem[] = [
   {
@@ -28,6 +29,11 @@ const RouteConfig: RouteItem[] = [
     path: '/my_schedule',
     name: 'My Schedule',
     element: <SuspenseWrapper component={<MySchedule />} />
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    element: <SuspenseWrapper component={<Dashboard />} />
   }
 ]
 

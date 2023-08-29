@@ -17,7 +17,7 @@ export default function TopMenu() {
       sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, boxShadow: 'none' }}
     >
       <ToolBar>
-        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           TopMenu
         </Typography>
         <Button startIcon={<LogoutIcon />}>Logout</Button>
