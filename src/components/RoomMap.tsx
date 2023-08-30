@@ -100,6 +100,9 @@ const RoomMap = () => {
           fill="white"
         />
         <rect
+          id="roomM1"
+          onClick={handleRoomClick}
+          className="room"
           x="306"
           y="35"
           width="365"
@@ -108,6 +111,9 @@ const RoomMap = () => {
           fill={MAP_STATUS_MAPPING[RoomData.roomM1.status]}
         />
         <rect
+          id="roomL1"
+          onClick={handleRoomClick}
+          className="room"
           x="306"
           y="273"
           width="365"
@@ -116,6 +122,9 @@ const RoomMap = () => {
           fill={MAP_STATUS_MAPPING[RoomData.roomL1.status]}
         />
         <rect
+          id="roomM2"
+          onClick={handleRoomClick}
+          className="room"
           x="738"
           y="273"
           width="195"
@@ -124,6 +133,9 @@ const RoomMap = () => {
           fill={MAP_STATUS_MAPPING[RoomData.roomM2.status]}
         />
         <rect
+          id="roomS1"
+          onClick={handleRoomClick}
+          className="room"
           x="43"
           y="35"
           width="195"
@@ -148,6 +160,9 @@ const RoomMap = () => {
           fill="black"
         />
         <rect
+          id="roomS2"
+          onClick={handleRoomClick}
+          className="room"
           x="43"
           y="232"
           width="195"
