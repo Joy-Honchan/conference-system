@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import RoomMap from 'images/RoomMap'
+import RoomMap from 'components/RoomMap'
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 export default function RoomStatus() {
   return (
@@ -40,17 +40,13 @@ export default function RoomStatus() {
             opacity: 0,
             transform: 'translateX(-5%)',
             transition: 'all 1s ease'
+          },
+          '.room': {
+            cursor: 'pointer'
           }
         }}
       >
-        <RoomMap
-          roomS1={'available'}
-          roomS2={'scheduled'}
-          roomS3={'available'}
-          roomM1={'available'}
-          roomM2={'available'}
-          roomL1={'occupied'}
-        />
+        <RoomMap />
       </Box>
     </Box>
   )

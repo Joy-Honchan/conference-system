@@ -1,0 +1,10 @@
+[
+    {
+        "roomId": "roomS1",
+        "meetings": [
+            {
+                "day": "monday"
+            }
+        ]
+    }
+]
