@@ -11,12 +11,13 @@ import { useFormik } from 'formik'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Button } from '@mui/material'
+import dayjs, { Dayjs } from 'dayjs'
 
 export default function FutureVacancy() {
-  const formik = useFormik({
+  const formik = useFormik<{ startDate: Dayjs | null; endDate: Dayjs | null }>({
     initialValues: {
-      startDate: new Date(),
-      endDate: new Date()
+      startDate: null,
+      endDate: null
     },
     onSubmit: (values) => {
       console.log(values)
@@ -36,9 +37,21 @@ export default function FutureVacancy() {
                 <TextField {...params} label="Room No." />
               )}
             />
-            <DatePicker label="Start Date" views={['year', 'month', 'day']} />
+            <DatePicker
+              label="Start Date"
+              views={['year', 'month', 'day']}
+              value={formik.values.startDate}
+              // onChange={(e) => console.log(dayjs(Number(e)))}
+              // onChange={formik.handleChange}
+              onChange={(e) => formik.setFieldValue('startDate', e)}
+            />
             <Typography variant="h4">-</Typography>
-            <DatePicker label="End Date" />
+            <DatePicker
+              label="End Date"
+              views={['year', 'month', 'day']}
+              value={formik.values.endDate}
+              onChange={(e) => formik.setFieldValue('startDate', e)}
+            />
             <Button variant="contained" type="submit">
               Submit
             </Button>

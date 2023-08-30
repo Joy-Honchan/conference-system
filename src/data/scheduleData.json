@@ -1,10 +1,120 @@
 [
     {
-        "roomId": "roomS1",
-        "meetings": [
+        "day": "Sunday",
+        "meeting": []
+    },
+    {
+        "day": "Monday",
+        "meeting": [
             {
-                "day": "monday"
+                "roomName": "Room S-1",
+                "startTime": "10:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room S-2",
+                "startTime": "14:00",
+                "endTime": "16:00"
             }
         ]
+    },
+    {
+        "day": "Tuesday",
+        "meeting": [
+            {
+                "roomName": "Room M-1",
+                "startTime": "10:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room S-2",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            },
+            {
+                "roomName": "Room S-3",
+                "startTime": "15:00",
+                "endTime": "17:00"
+            }
+        ]
+    },
+    {
+        "day": "Wednesday",
+        "meeting": [
+            {
+                "roomName": "Room S-1",
+                "startTime": "09:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room L-1",
+                "startTime": "09:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room S-2",
+                "startTime": "14:00",
+                "endTime": "15:00"
+            },
+            {
+                "roomName": "Room M-2",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            }
+        ]
+    },
+    {
+        "day": "Thursday",
+        "meeting": [
+            {
+                "roomName": "Room S-3",
+                "startTime": "10:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room M-1",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            },
+            {
+                "roomName": "Room S-2",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            },
+            {
+                "roomName": "Room M-2",
+                "startTime": "15:00",
+                "endTime": "17:00"
+            }
+        ]
+    },
+    {
+        "day": "Friday",
+        "meeting": [
+            {
+                "roomName": "Room S-1",
+                "startTime": "10:00",
+                "endTime": "12:00"
+            },
+            {
+                "roomName": "Room S-3",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            },
+            {
+                "roomName": "Room M-1",
+                "startTime": "14:00",
+                "endTime": "16:00"
+            },
+            {
+                "roomName": "Room L-1",
+                "startTime": "15:00",
+                "endTime": "17:00"
+            }
+        ]
+    },
+    {
+        "day": "Saturday",
+        "meeting": []
     }
 ]
