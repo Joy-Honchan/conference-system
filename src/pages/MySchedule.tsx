@@ -11,9 +11,7 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
-import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 
 import ScheduleData from 'data/scheduleData.json'
 import NoteTextField from 'components/NoteTextField'
@@ -140,6 +138,7 @@ export default function MySchedule() {
                     ].meeting[0].participants?.join(', ') || 'No participants'}
                   </Box>
                 </Box>
+                <Typography sx={{ marginBottom: 1 }}>Quick Note:</Typography>
                 <NoteTextField timeString={timeString} />
               </>
             ) : (
