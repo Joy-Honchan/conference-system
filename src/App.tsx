@@ -6,11 +6,15 @@ import {
   useNavigate
 } from 'react-router-dom'
 import RouteConfig from 'configs/route'
+import TemplatWithNavebar from 'components/template'
 
 //ThemeProvider
 import ThemeProvider from 'providers/ThemeProvider'
-
-import TemplatWithNavebar from 'components/template'
+//NotistackProvider
+import NotistackProvider from 'providers/NotistackProvider'
+//Redux
+import { Provider } from 'react-redux'
+import store from 'store'
 
 import NoteProvider from 'providers/NoteContext'
 
