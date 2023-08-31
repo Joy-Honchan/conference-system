@@ -13,7 +13,7 @@ import {
   keyframes,
   ButtonBase
 } from '@mui/material'
-import meetingPic from 'assets/undraw_meeting_re_i53h.svg'
+import meetingPic from 'images/undraw_meeting_re_i53h.svg'
 
 function Login() {
   const formik = useFormik({
