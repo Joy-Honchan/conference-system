@@ -7,7 +7,6 @@ import {
   IconButton
 } from '@mui/material'
 import { notifySuccess, notifyError } from 'utils/notify'
-import useSWR from 'swr'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import List from '@mui/material/List'

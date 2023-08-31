@@ -12,8 +12,6 @@ import TemplatWithNavebar from 'components/Navbar'
 import ThemeProvider from 'providers/ThemeProvider'
 //NotistackProvider
 import NotistackProvider from 'providers/NotistackProvider'
-//SWRQueryProvider
-import SWRQueryProvider from 'providers/SWRQueryProvider'
 //Redux
 import { Provider } from 'react-redux'
 import store from 'store'
@@ -37,16 +35,14 @@ function App() {
   ])
   return (
     <Provider store={store}>
-      <SWRQueryProvider>
-        <ThemeProvider>
-          <NotistackProvider>
-            <RouterProvider
-              router={router}
-              // fallbackElement={<div>Router is loading</div>}
-            />
-          </NotistackProvider>
-        </ThemeProvider>
-      </SWRQueryProvider>
+      <ThemeProvider>
+        <NotistackProvider>
+          <RouterProvider
+            router={router}
+            // fallbackElement={<div>Router is loading</div>}
+          />
+        </NotistackProvider>
+      </ThemeProvider>
     </Provider>
   )
 }
