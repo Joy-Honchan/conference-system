@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import Badge from '@mui/material/Badge'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -16,6 +16,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
 import ScheduleData from 'data/scheduleData.json'
+import NoteTextField from 'components/NoteTextField'
 interface MeetingType {
   roomName: string
   startTime: string
@@ -63,6 +64,8 @@ export default function MySchedule() {
 
   const [selectDay, setSelectDay] = useState<Dayjs>(dayjs())
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 15])
+
+  const timeString = useMemo(() => selectDay.format('YYYYMMDD'), [selectDay])
 
   const handleMonthChange = (date: Dayjs) => {
     if (date.month() % 2 === 0) {
@@ -137,24 +140,7 @@ export default function MySchedule() {
                     ].meeting[0].participants?.join(', ') || 'No participants'}
                   </Box>
                 </Box>
-                <Typography sx={{ marginBottom: 1 }}>Quick Note:</Typography>
-                <Box sx={{ marginBottom: 1 }}>
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    placeholder="Type your note here"
-                  />
-                </Box>
-                <Grid
-                  item
-                  xs={12}
-                  sx={{
-                    textAlign: 'end'
-                  }}
-                >
-                  <Button variant="contained">Save</Button>
-                </Grid>
+                <NoteTextField timeString={timeString} />
               </>
             ) : (
               'No meeting today'
