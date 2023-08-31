@@ -1,5 +1,5 @@
 import { useState, lazy, ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -28,8 +28,12 @@ const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
 }
 
 export default function SideBar({ children }: { children: ReactNode }) {
+  const location = useLocation()
   const navigate = useNavigate()
-  const [selectedId, setSelectedId] = useState(0)
+  const currIndex = RouteConfig.findIndex(
+    (route) => route.path === location.pathname
+  )
+  const [selectedId, setSelectedId] = useState(currIndex)
 
   const handleListItemClick = (index: number, path?: string) => {
     setSelectedId(index)
