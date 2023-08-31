@@ -8,7 +8,7 @@ import {
 } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
-const ColorModeContext = createContext({
+export const ColorModeContext = createContext({
   toggleColorMode: () => {}
 })
 
@@ -39,9 +39,10 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           text:
             mode === 'light'
               ? {
-                  primary: grey[800]
+                  primary: grey[800],
+                  contrast: grey[200]
                 }
-              : { primary: grey[300] },
+              : { primary: grey[300], contrast: grey[800] },
           ...(mode === 'dark' && {
             background: {
               default: grey[800]
@@ -49,11 +50,21 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           })
         },
         components: {
-          MuiButton: {
+          // MuiButton: {
+          //   styleOverrides: {
+          //     root: ({ ownerState, theme }) => ({
+          //       // ...(ownerState.className === 'btn' && {
+          //       //   backgroundColor: 'red'
+          //       // }),
+          //       color: theme.palette.text.primary
+          //     })
+          //   }
+          // },
+          MuiPaper: {
             styleOverrides: {
-              root: ({ theme }) => ({
-                color: theme.palette.text.primary
-              })
+              root: {
+                borderRadius: '25px'
+              }
             }
           },
           MuiListItemButton: {
