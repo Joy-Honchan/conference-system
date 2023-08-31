@@ -9,7 +9,16 @@
             {
                 "roomName": "Room S-1",
                 "startTime": "10:00",
-                "endTime": "12:00"
+                "endTime": "12:00",
+                "title": "Frontend Team Report",
+                "participants": [
+                    "Allen",
+                    "Ben",
+                    "Cathy",
+                    "David",
+                    "Ethan",
+                    "Fionna"
+                ]
             },
             {
                 "roomName": "Room S-2",
@@ -24,7 +33,13 @@
             {
                 "roomName": "Room M-1",
                 "startTime": "10:00",
-                "endTime": "12:00"
+                "endTime": "12:00",
+                "title": "Project 413 Discussion",
+                "participants": [
+                    "Ben",
+                    "David",
+                    "Helen"
+                ]
             },
             {
                 "roomName": "Room S-2",
@@ -44,7 +59,13 @@
             {
                 "roomName": "Room S-1",
                 "startTime": "09:00",
-                "endTime": "12:00"
+                "endTime": "12:00",
+                "title": "Project 543 Discussion",
+                "participants": [
+                    "Cathy",
+                    "Fionna",
+                    "Ian"
+                ]
             },
             {
                 "roomName": "Room L-1",
@@ -69,7 +90,13 @@
             {
                 "roomName": "Room S-3",
                 "startTime": "10:00",
-                "endTime": "12:00"
+                "endTime": "12:00",
+                "title": "Backend Team Report",
+                "participants": [
+                    "Helen",
+                    "Ian",
+                    "Joan"
+                ]
             },
             {
                 "roomName": "Room M-1",
@@ -94,7 +121,14 @@
             {
                 "roomName": "Room S-1",
                 "startTime": "10:00",
-                "endTime": "12:00"
+                "endTime": "12:00",
+                "title": "Project 789 Discussion",
+                "participants": [
+                    "Allen",
+                    "Ethan",
+                    "Helen",
+                    "Ian"
+                ]
             },
             {
                 "roomName": "Room S-3",

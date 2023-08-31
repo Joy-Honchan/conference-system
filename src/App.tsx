@@ -12,6 +12,8 @@ import ThemeProvider from 'providers/ThemeProvider'
 
 import TemplatWithNavebar from 'components/template'
 
+import NoteProvider from 'providers/NoteContext'
+
 const Login = lazy(() => import('pages/Login'))
 
 function App() {
@@ -31,10 +33,12 @@ function App() {
   ])
   return (
     <ThemeProvider>
-      <RouterProvider
-        router={router}
-        // fallbackElement={<div>Router is loading</div>}
-      />
+      <NoteProvider>
+        <RouterProvider
+          router={router}
+          // fallbackElement={<div>Router is loading</div>}
+        />
+      </NoteProvider>
     </ThemeProvider>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import Badge from '@mui/material/Badge'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -11,6 +11,22 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
+import Box from '@mui/material/Box'
+
+import ScheduleData from 'data/scheduleData.json'
+import NoteTextField from 'components/NoteTextField'
+interface MeetingType {
+  roomName: string
+  startTime: string
+  endTime: string
+  title?: string
+  participants?: string[]
+}
+
+interface ScheduleDataType {
+  day: string
+  meeting: MeetingType[]
+}
 
 function ServerDay(
   props: PickersDayProps<Dayjs> & { highlightedDays?: number[] }
@@ -42,8 +58,12 @@ function ServerDay(
 }
 
 export default function MySchedule() {
+  const SCHEDULE_DATA = ScheduleData as ScheduleDataType[]
+
   const [selectDay, setSelectDay] = useState<Dayjs>(dayjs())
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 15])
+
+  const timeString = useMemo(() => selectDay.format('YYYYMMDD'), [selectDay])
 
   const handleMonthChange = (date: Dayjs) => {
     if (date.month() % 2 === 0) {
@@ -86,10 +106,40 @@ export default function MySchedule() {
           <CardContent>
             {highlightedDays.includes(selectDay.date()) ? (
               <>
-                <Typography>Title</Typography>
-                <Typography>Time</Typography>
-                <Typography>Participants</Typography>
-                <Typography>Quick Note</Typography>
+                <Box
+                  display="grid"
+                  gridTemplateColumns={'max-content 1fr'}
+                  sx={{
+                    '.MuiBox-root': {
+                      marginBottom: 1
+                    },
+                    '.MuiTypography-root': {
+                      marginRight: 1
+                    }
+                  }}
+                >
+                  <Typography>Title:</Typography>
+                  <Box>
+                    {SCHEDULE_DATA[selectDay.day()].meeting[0].title ||
+                      'Untitled Meeting'}
+                  </Box>
+                  <Typography>Time:</Typography>
+                  <Box>
+                    {SCHEDULE_DATA[selectDay.day()].meeting[0].startTime ||
+                      '08:30'}
+                    -
+                    {SCHEDULE_DATA[selectDay.day()].meeting[0].endTime ||
+                      '10:30'}
+                  </Box>
+                  <Typography>Participants:</Typography>
+                  <Box>
+                    {SCHEDULE_DATA[
+                      selectDay.day()
+                    ].meeting[0].participants?.join(', ') || 'No participants'}
+                  </Box>
+                </Box>
+                <Typography sx={{ marginBottom: 1 }}>Quick Note:</Typography>
+                <NoteTextField timeString={timeString} />
               </>
             ) : (
               'No meeting today'
