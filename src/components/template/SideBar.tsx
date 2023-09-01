@@ -1,5 +1,5 @@
 import { useState, lazy, ReactNode } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -14,22 +14,26 @@ import Typography from '@mui/material/Typography'
 
 //icon
 const MeetingRoomIcon = lazy(() => import('@mui/icons-material/MeetingRoom'))
-const AccessTimeIcon = lazy(() => import('@mui/icons-material/AccessTime'))
+// const AccessTimeIcon = lazy(() => import('@mui/icons-material/AccessTime'))
 const EditCalendarIcon = lazy(() => import('@mui/icons-material/EditCalendar'))
 const PersonIcon = lazy(() => import('@mui/icons-material/Person'))
-const DashboardIcon = lazy(() => import('@mui/icons-material/Dashboard'))
+// const DashboardIcon = lazy(() => import('@mui/icons-material/Dashboard'))
 
 const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'Room Status': <MeetingRoomIcon />,
-  'Future Vacancy': <AccessTimeIcon />,
+  // 'Future Vacancy': <AccessTimeIcon />,
   'Form Meeting': <EditCalendarIcon />,
-  'My Schedule': <PersonIcon />,
-  Dashboard: <DashboardIcon />
+  'My Schedule': <PersonIcon />
+  // Dashboard: <DashboardIcon />
 }
 
 export default function SideBar({ children }: { children: ReactNode }) {
+  const location = useLocation()
   const navigate = useNavigate()
-  const [selectedId, setSelectedId] = useState(0)
+  const currIndex = RouteConfig.findIndex(
+    (route) => route.path === location.pathname
+  )
+  const [selectedId, setSelectedId] = useState(currIndex)
 
   const handleListItemClick = (index: number, path?: string) => {
     setSelectedId(index)
@@ -86,11 +90,13 @@ export default function SideBar({ children }: { children: ReactNode }) {
         }}
       >
         <Toolbar />
-        {RouteConfig[selectedId].pageTitle ? (
+        {RouteConfig[selectedId]?.pageTitle ? (
           <Typography variant="h4" sx={{ marginBottom: 2 }}>
             {RouteConfig[selectedId].pageTitle}
           </Typography>
-        ) : null}
+        ) : (
+          <Typography variant="h4">404</Typography>
+        )}
         {children}
       </Box>
     </>
