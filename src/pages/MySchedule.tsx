@@ -61,7 +61,9 @@ export default function MySchedule() {
   const SCHEDULE_DATA = ScheduleData as ScheduleDataType[]
 
   const [selectDay, setSelectDay] = useState<Dayjs>(dayjs())
-  const [highlightedDays, setHighlightedDays] = useState([1, 2, 15])
+  const [highlightedDays, setHighlightedDays] = useState(
+    dayjs().month() % 2 === 0 ? [3, 16, 27] : [1, 2, 15]
+  )
 
   const timeString = useMemo(() => selectDay.format('YYYYMMDD'), [selectDay])
 
