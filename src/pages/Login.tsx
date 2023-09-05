@@ -9,24 +9,40 @@ import {
   TextField,
   styled,
   Typography,
-  Divider,
-  keyframes,
-  ButtonBase
+  Divider
 } from '@mui/material'
 import meetingPic from 'images/undraw_meeting_re_i53h.svg'
+import { async } from 'q'
+import { notifySuccess } from 'utils/notify'
 
 function Login() {
+  const correctData = { username: 'admin', password: 'aaaa' }
+  const handleShow = () => {
+    formik.setValues(correctData)
+  }
   const formik = useFormik({
     initialValues: {
-      username: 'admin',
-      password: 'aaaa'
+      username: '',
+      password: ''
     },
     validationSchema: Yup.object({
       username: Yup.string().required(),
       password: Yup.string().required()
     }),
-    onSubmit: (values) => {
-      console.log('value', values)
+    onSubmit: async (values) => {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (values.username !== correctData.username) {
+        formik.setFieldError('username', 'Wrong Username')
+      }
+      if (values.password !== correctData.password) {
+        formik.setFieldError('password', 'Wrong Password')
+      }
+      if (
+        values.username === correctData.username &&
+        values.password === correctData.password
+      ) {
+        notifySuccess('Login Success')
+      }
     }
   })
   return (
@@ -43,8 +59,23 @@ function Login() {
               </Typography>
               <Divider />
             </Box>
-            <TextField id="username" label="Username" />
-            <TextField id="password" label="Password" type="password" />
+            <TextField
+              id="username"
+              label="Username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={!!formik.errors.username}
+              helperText={formik.errors.username}
+            />
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={!!formik.errors.password}
+              helperText={formik.errors.password}
+            />
             <Box className="login-btn-container">
               <Button
                 variant="contained"
@@ -54,6 +85,7 @@ function Login() {
               >
                 Login
               </Button>
+              <Button onClick={handleShow}>Show Data</Button>
             </Box>
           </Stack>
         </Paper>
@@ -93,10 +125,10 @@ const StyleWrapper = styled('main')(({ theme }) => ({
         marginBottom: theme.spacing(1)
       },
       '.login-btn-container': {
-        display: 'flex',
-        justifyContent: 'center',
+        textAlign: 'center',
         '.login-btn': {
-          color: theme.palette.text.contrast
+          color: theme.palette.text.contrast,
+          marginRight: theme.spacing(1)
         }
       }
     }

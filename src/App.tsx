@@ -37,12 +37,14 @@ function App() {
   ])
   return (
     <ThemeProvider>
-      <NoteProvider>
-        <RouterProvider
-          router={router}
-          // fallbackElement={<div>Router is loading</div>}
-        />
-      </NoteProvider>
+      <NotistackProvider>
+        <NoteProvider>
+          <RouterProvider
+            router={router}
+            // fallbackElement={<div>Router is loading</div>}
+          />
+        </NoteProvider>
+      </NotistackProvider>
     </ThemeProvider>
   )
 }
