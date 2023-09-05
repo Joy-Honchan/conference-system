@@ -8,7 +8,11 @@ interface PaletteOptionType {
     darkest?: string
 }
 
-declare module '@mui/material/styles'{
+interface TextColorType {
+    contrast?: string
+}
+
+declare module '@mui/material/styles' {
     // interface Palette {
     //     danger: {
     //         main:string
@@ -20,6 +24,7 @@ declare module '@mui/material/styles'{
     //         main:string
     //     }
     // }
-    interface PaletteColor extends PaletteOptionType {}
-    interface SimplePaletteColorOptions extends PaletteOptionType {}
+    interface PaletteColor extends PaletteOptionType { }
+    interface SimplePaletteColorOptions extends PaletteOptionType { }
+    interface TypeText extends TextColorType { }
 }
