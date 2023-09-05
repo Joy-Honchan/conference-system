@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -13,8 +14,10 @@ import {
 import meetingPic from 'images/undraw_meeting_re_i53h.svg'
 import { notifySuccess } from 'utils/notify'
 import { useNavigate } from 'react-router'
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
 
 function Login() {
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const correctData = { username: 'admin', password: 'aaaa' }
   const handleShow = () => {
@@ -30,6 +33,7 @@ function Login() {
       password: Yup.string().required()
     }),
     onSubmit: async (values) => {
+      setIsLoading(() => true)
       await new Promise((resolve) => setTimeout(resolve, 1000))
       if (values.username !== correctData.username) {
         formik.setFieldError('username', 'Wrong Username')
@@ -44,6 +48,7 @@ function Login() {
         notifySuccess('Login Success')
         navigate('/')
       }
+      setIsLoading(false)
     }
   })
   return (
@@ -79,10 +84,12 @@ function Login() {
             />
             <Box className="login-btn-container">
               <Button
+                disabled={isLoading}
                 variant="contained"
                 color="primary"
                 className="login-btn"
                 type="submit"
+                startIcon={isLoading ? <HourglassEmptyIcon /> : null}
               >
                 Login
               </Button>
@@ -104,7 +111,7 @@ const StyleWrapper = styled('main')(({ theme }) => ({
   justifyContent: 'center',
   '.center-paper': {
     background: 'rgb(255,255,255)',
-    flexGrow: 1,
+    flex: '1 0 330px',
     display: 'flex',
     margin: theme.spacing(8),
     maxWidth: 1300,
