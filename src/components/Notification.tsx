@@ -1,11 +1,14 @@
 import { forwardRef } from 'react'
 import Alert from '@mui/material/Alert'
-import { CustomContentProps, MaterialDesignContent } from 'notistack'
-import { styled } from '@mui/material/styles'
+import { CustomContentProps } from 'notistack'
 
 const Notification = forwardRef<HTMLDivElement, CustomContentProps>(
   (props, ref) => {
-    return <Alert ref={ref} variant="filled" severity="success" />
+    return (
+      <Alert ref={ref} variant="filled" severity="success">
+        {props.message}
+      </Alert>
+    )
   }
 )
 

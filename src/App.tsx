@@ -30,19 +30,16 @@ function App() {
       path: 'login',
       element: <Login />
     }
-    // {
-    //   path: '/logout',
-    //   element: <Suspense fallback={null}>{/* <Logout/> */}</Suspense>
-    // }
   ])
   return (
     <ThemeProvider>
-      <NoteProvider>
-        <RouterProvider
-          router={router}
-          // fallbackElement={<div>Router is loading</div>}
-        />
-      </NoteProvider>
+      <NotistackProvider>
+        <NoteProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </NoteProvider>
+      </NotistackProvider>
     </ThemeProvider>
   )
 }
@@ -50,11 +47,10 @@ function App() {
 export default App
 
 const InnerRouter = () => {
-  const navigate = useNavigate()
-  // useEffect(() => {
-  //   // if no login token
-  //   navigate('/login')
-  // }, [])
   const routes = useRoutes(RouteConfig)
-  return <TemplatWithNavebar>{routes}</TemplatWithNavebar>
+  return (
+    <TemplatWithNavebar>
+      <Suspense fallback={<div>Loading...</div>}>{routes}</Suspense>
+    </TemplatWithNavebar>
+  )
 }

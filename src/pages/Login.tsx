@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -9,24 +9,46 @@ import {
   TextField,
   styled,
   Typography,
-  Divider,
-  keyframes,
-  ButtonBase
+  Divider
 } from '@mui/material'
 import meetingPic from 'images/undraw_meeting_re_i53h.svg'
+import { notifySuccess } from 'utils/notify'
+import { useNavigate } from 'react-router'
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty'
 
 function Login() {
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const correctData = { username: 'admin', password: 'aaaa' }
+  const handleShow = () => {
+    formik.setValues(correctData)
+  }
   const formik = useFormik({
     initialValues: {
-      username: 'admin',
-      password: 'aaaa'
+      username: '',
+      password: ''
     },
     validationSchema: Yup.object({
       username: Yup.string().required(),
       password: Yup.string().required()
     }),
-    onSubmit: (values) => {
-      console.log('value', values)
+    onSubmit: async (values) => {
+      setIsLoading(() => true)
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (values.username !== correctData.username) {
+        formik.setFieldError('username', 'Wrong Username')
+      }
+      if (values.password !== correctData.password) {
+        formik.setFieldError('password', 'Wrong Password')
+      }
+      if (
+        values.username === correctData.username &&
+        values.password === correctData.password
+      ) {
+        notifySuccess('Login Success')
+        navigate('/')
+      }
+      setIsLoading(false)
     }
   })
   return (
@@ -43,17 +65,35 @@ function Login() {
               </Typography>
               <Divider />
             </Box>
-            <TextField id="username" label="Username" />
-            <TextField id="password" label="Password" type="password" />
+            <TextField
+              id="username"
+              label="Username"
+              value={formik.values.username}
+              onChange={formik.handleChange}
+              error={!!formik.errors.username}
+              helperText={formik.errors.username}
+            />
+            <TextField
+              id="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={!!formik.errors.password}
+              helperText={formik.errors.password}
+            />
             <Box className="login-btn-container">
               <Button
+                disabled={isLoading}
                 variant="contained"
                 color="primary"
                 className="login-btn"
                 type="submit"
+                startIcon={isLoading ? <HourglassEmptyIcon /> : null}
               >
                 Login
               </Button>
+              <Button onClick={handleShow}>Show Data</Button>
             </Box>
           </Stack>
         </Paper>
@@ -71,7 +111,7 @@ const StyleWrapper = styled('main')(({ theme }) => ({
   justifyContent: 'center',
   '.center-paper': {
     background: 'rgb(255,255,255)',
-    flexGrow: 1,
+    flex: '1 0 330px',
     display: 'flex',
     margin: theme.spacing(8),
     maxWidth: 1300,
@@ -93,10 +133,10 @@ const StyleWrapper = styled('main')(({ theme }) => ({
         marginBottom: theme.spacing(1)
       },
       '.login-btn-container': {
-        display: 'flex',
-        justifyContent: 'center',
+        textAlign: 'center',
         '.login-btn': {
-          color: theme.palette.text.contrast
+          color: theme.palette.text.contrast,
+          marginRight: theme.spacing(1)
         }
       }
     }

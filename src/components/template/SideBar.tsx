@@ -1,4 +1,4 @@
-import { useState, lazy, ReactNode } from 'react'
+import { useState, lazy, ReactNode, Suspense } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
@@ -6,7 +6,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Toolbar from '@mui/material/Toolbar'
-import { IconSuspenseWrapper } from 'components/SuspenseWrapper'
+import Skeleton from '@mui/material/Skeleton'
 
 import RouteConfig from 'configs/route'
 import Box from '@mui/material/Box'
@@ -14,17 +14,13 @@ import Typography from '@mui/material/Typography'
 
 //icon
 const MeetingRoomIcon = lazy(() => import('@mui/icons-material/MeetingRoom'))
-// const AccessTimeIcon = lazy(() => import('@mui/icons-material/AccessTime'))
 const EditCalendarIcon = lazy(() => import('@mui/icons-material/EditCalendar'))
 const PersonIcon = lazy(() => import('@mui/icons-material/Person'))
-// const DashboardIcon = lazy(() => import('@mui/icons-material/Dashboard'))
 
 const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'Room Status': <MeetingRoomIcon />,
-  // 'Future Vacancy': <AccessTimeIcon />,
   'Form Meeting': <EditCalendarIcon />,
   'My Schedule': <PersonIcon />
-  // Dashboard: <DashboardIcon />
 }
 
 export default function SideBar({ children }: { children: ReactNode }) {
@@ -70,9 +66,9 @@ export default function SideBar({ children }: { children: ReactNode }) {
               onClick={() => handleListItemClick(index, route.path)}
             >
               <ListItemIcon>
-                <IconSuspenseWrapper
-                  component={ROUTE_ICON_MAPPING[route.name]}
-                />
+                <Suspense fallback={<Skeleton variant="circular" />}>
+                  {ROUTE_ICON_MAPPING[route.name]}
+                </Suspense>
               </ListItemIcon>
               <ListItemText primary={route.name} />
             </ListItemButton>
