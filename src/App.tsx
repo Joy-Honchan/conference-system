@@ -47,11 +47,10 @@ function App() {
 export default App
 
 const InnerRouter = () => {
-  const navigate = useNavigate()
-  // useEffect(() => {
-  //   // if no login token
-  //   navigate('/login')
-  // }, [])
   const routes = useRoutes(RouteConfig)
-  return <TemplatWithNavebar>{routes}</TemplatWithNavebar>
+  return (
+    <TemplatWithNavebar>
+      <Suspense fallback={<div>Loading...</div>}>{routes}</Suspense>
+    </TemplatWithNavebar>
+  )
 }

@@ -1,4 +1,3 @@
-import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -12,10 +11,11 @@ import {
   Divider
 } from '@mui/material'
 import meetingPic from 'images/undraw_meeting_re_i53h.svg'
-import { async } from 'q'
 import { notifySuccess } from 'utils/notify'
+import { useNavigate } from 'react-router'
 
 function Login() {
+  const navigate = useNavigate()
   const correctData = { username: 'admin', password: 'aaaa' }
   const handleShow = () => {
     formik.setValues(correctData)
@@ -42,6 +42,7 @@ function Login() {
         values.password === correctData.password
       ) {
         notifySuccess('Login Success')
+        navigate('/')
       }
     }
   })
