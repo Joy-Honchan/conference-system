@@ -30,19 +30,14 @@ function App() {
       path: 'login',
       element: <Login />
     }
-    // {
-    //   path: '/logout',
-    //   element: <Suspense fallback={null}>{/* <Logout/> */}</Suspense>
-    // }
   ])
   return (
     <ThemeProvider>
       <NotistackProvider>
         <NoteProvider>
-          <RouterProvider
-            router={router}
-            // fallbackElement={<div>Router is loading</div>}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <RouterProvider router={router} />
+          </Suspense>
         </NoteProvider>
       </NotistackProvider>
     </ThemeProvider>
