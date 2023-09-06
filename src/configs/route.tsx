@@ -13,16 +13,16 @@ const RouteConfig: RouteItem[] = [
     pageTitle: 'Room Status'
   },
   {
-    path: '/form_meeting',
-    name: 'Form Meeting',
-    element: <FormMeeting />,
-    pageTitle: 'Form Meeting'
-  },
-  {
     path: '/my_schedule',
     name: 'My Schedule',
     element: <MySchedule />,
     pageTitle: 'My Schedule'
+  },
+  {
+    path: '/form_meeting',
+    name: 'Form Meeting',
+    element: <FormMeeting />,
+    pageTitle: 'Form Meeting'
   }
 ]
 
