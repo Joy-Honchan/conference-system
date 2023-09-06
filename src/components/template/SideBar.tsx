@@ -9,8 +9,8 @@ import Toolbar from '@mui/material/Toolbar'
 import Skeleton from '@mui/material/Skeleton'
 
 import RouteConfig from 'configs/route'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles'
 
 //icon
 const MeetingRoomIcon = lazy(() => import('@mui/icons-material/MeetingRoom'))
@@ -23,7 +23,39 @@ const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'My Schedule': <PersonIcon />
 }
 
-export default function SideBar({ children }: { children: ReactNode }) {
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+  open?: boolean
+  drawerWidth: number
+}>(({ theme, open, drawerWidth }) => ({
+  p: 3,
+  display: 'flex',
+  flexDirection: 'column',
+  flexWrap: 'wrap',
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen
+  }),
+  marginLeft: -drawerWidth,
+  ...(open && {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginLeft: 0
+  })
+}))
+
+export default function SideBar({
+  open,
+  children,
+  drawerWidth
+}: {
+  open: boolean
+  children: ReactNode
+  drawerWidth: number
+}) {
   const location = useLocation()
   const navigate = useNavigate()
   const currIndex = RouteConfig.findIndex(
@@ -40,15 +72,16 @@ export default function SideBar({ children }: { children: ReactNode }) {
   return (
     <>
       <Drawer
-        variant="permanent"
         sx={{
-          width: 240,
+          width: drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 240,
+            width: drawerWidth,
             boxSizing: 'border-box'
           }
         }}
+        open={open}
+        variant="persistent"
       >
         <Toolbar />
         <List
@@ -75,16 +108,7 @@ export default function SideBar({ children }: { children: ReactNode }) {
           ))}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        sx={{
-          p: 3,
-          display: 'flex',
-          flexDirection: 'column',
-          flexGrow: 1,
-          flexWrap: 'wrap'
-        }}
-      >
+      <Main open={open} drawerWidth={drawerWidth}>
         <Toolbar />
         {RouteConfig[selectedId]?.pageTitle ? (
           <Typography variant="h4" sx={{ marginBottom: 2 }}>
@@ -94,7 +118,7 @@ export default function SideBar({ children }: { children: ReactNode }) {
           <Typography variant="h4">404</Typography>
         )}
         {children}
-      </Box>
+      </Main>
     </>
   )
 }
