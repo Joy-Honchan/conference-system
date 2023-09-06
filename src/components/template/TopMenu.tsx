@@ -26,8 +26,12 @@ export default function TopMenu() {
       }}
     >
       <ToolBar>
-        <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-          TopMenu
+        <Typography
+          variant="h5"
+          component="div"
+          sx={{ flexGrow: 1, color: 'text.contrast' }}
+        >
+          Conference System
         </Typography>
         <Button
           onClick={handleLogout}
