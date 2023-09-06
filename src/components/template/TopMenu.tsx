@@ -11,7 +11,13 @@ import { useNavigate } from 'react-router-dom'
 const MenuIcon = React.lazy(() => import('@mui/icons-material/Menu'))
 const LogoutIcon = React.lazy(() => import('@mui/icons-material/Logout'))
 
-export default function TopMenu() {
+export default function TopMenu({
+  open,
+  handleOpen
+}: {
+  open: boolean
+  handleOpen: () => void
+}) {
   const navigate = useNavigate()
   const handleLogout = () => {
     navigate('/login')
@@ -26,6 +32,18 @@ export default function TopMenu() {
       }}
     >
       <ToolBar>
+        <IconButton
+          onClick={handleOpen}
+          aria-label="toggle sidebar"
+          sx={{ mr: 2, color: 'text.contrast' }}
+        >
+          <MenuIcon
+            sx={{
+              transition: 'transform 0.5s',
+              transform: open ? 'rotate(90deg)' : ''
+            }}
+          />
+        </IconButton>
         <Typography
           variant="h5"
           component="div"
