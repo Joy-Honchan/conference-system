@@ -127,7 +127,7 @@ const StyleWrapper = styled('main')(({ theme }) => ({
     },
     '.input-section': {
       background: `linear-gradient(225deg, #6c63ff60 0%, ${theme.palette.primary.lighter}60 80%)`,
-      flex: '0 0 250px',
+      flex: '1 0 330px',
       padding: `${theme.spacing(15)} ${theme.spacing(5)}`,
       '.app-title': {
         marginBottom: theme.spacing(1)
