@@ -40,9 +40,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
             mode === 'light'
               ? {
                   primary: grey[800],
-                  contrast: grey[200]
+                  contrast: grey[50]
                 }
-              : { primary: grey[300], contrast: grey[800] },
+              : { primary: grey[100], contrast: grey[800] },
           ...(mode === 'dark' && {
             background: {
               default: grey[800]
@@ -50,16 +50,6 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
           })
         },
         components: {
-          // MuiButton: {
-          //   styleOverrides: {
-          //     root: ({ ownerState, theme }) => ({
-          //       // ...(ownerState.className === 'btn' && {
-          //       //   backgroundColor: 'red'
-          //       // }),
-          //       color: theme.palette.text.primary
-          //     })
-          //   }
-          // },
           MuiPaper: {
             styleOverrides: {
               root: {

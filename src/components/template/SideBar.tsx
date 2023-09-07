@@ -1,4 +1,4 @@
-import { useState, lazy, ReactNode } from 'react'
+import { useState, lazy, ReactNode, Suspense } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
@@ -6,28 +6,56 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Toolbar from '@mui/material/Toolbar'
-import { IconSuspenseWrapper } from 'components/SuspenseWrapper'
+import Skeleton from '@mui/material/Skeleton'
 
 import RouteConfig from 'configs/route'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+import { styled } from '@mui/material/styles'
 
 //icon
 const MeetingRoomIcon = lazy(() => import('@mui/icons-material/MeetingRoom'))
-// const AccessTimeIcon = lazy(() => import('@mui/icons-material/AccessTime'))
 const EditCalendarIcon = lazy(() => import('@mui/icons-material/EditCalendar'))
 const PersonIcon = lazy(() => import('@mui/icons-material/Person'))
-// const DashboardIcon = lazy(() => import('@mui/icons-material/Dashboard'))
 
 const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
   'Room Status': <MeetingRoomIcon />,
-  // 'Future Vacancy': <AccessTimeIcon />,
   'Form Meeting': <EditCalendarIcon />,
   'My Schedule': <PersonIcon />
-  // Dashboard: <DashboardIcon />
 }
 
-export default function SideBar({ children }: { children: ReactNode }) {
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
+  open?: boolean
+  drawerWidth: number
+}>(({ theme, open, drawerWidth }) => ({
+  p: 3,
+  display: 'flex',
+  flexDirection: 'column',
+  flexWrap: 'wrap',
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  transition: theme.transitions.create('margin', {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen
+  }),
+  marginLeft: -drawerWidth,
+  ...(open && {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginLeft: 0
+  })
+}))
+
+export default function SideBar({
+  open,
+  children,
+  drawerWidth
+}: {
+  open: boolean
+  children: ReactNode
+  drawerWidth: number
+}) {
   const location = useLocation()
   const navigate = useNavigate()
   const currIndex = RouteConfig.findIndex(
@@ -44,15 +72,16 @@ export default function SideBar({ children }: { children: ReactNode }) {
   return (
     <>
       <Drawer
-        variant="permanent"
         sx={{
-          width: 240,
+          width: drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 240,
+            width: drawerWidth,
             boxSizing: 'border-box'
           }
         }}
+        open={open}
+        variant="persistent"
       >
         <Toolbar />
         <List
@@ -70,25 +99,16 @@ export default function SideBar({ children }: { children: ReactNode }) {
               onClick={() => handleListItemClick(index, route.path)}
             >
               <ListItemIcon>
-                <IconSuspenseWrapper
-                  component={ROUTE_ICON_MAPPING[route.name]}
-                />
+                <Suspense fallback={<Skeleton variant="circular" />}>
+                  {ROUTE_ICON_MAPPING[route.name]}
+                </Suspense>
               </ListItemIcon>
               <ListItemText primary={route.name} />
             </ListItemButton>
           ))}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        sx={{
-          p: 3,
-          display: 'flex',
-          flexDirection: 'column',
-          flexGrow: 1,
-          flexWrap: 'wrap'
-        }}
-      >
+      <Main open={open} drawerWidth={drawerWidth}>
         <Toolbar />
         {RouteConfig[selectedId]?.pageTitle ? (
           <Typography variant="h4" sx={{ marginBottom: 2 }}>
@@ -98,7 +118,7 @@ export default function SideBar({ children }: { children: ReactNode }) {
           <Typography variant="h4">404</Typography>
         )}
         {children}
-      </Box>
+      </Main>
     </>
   )
 }
