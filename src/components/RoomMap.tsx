@@ -286,7 +286,7 @@ const RoomMap = () => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button>Reserve</Button>
+          {/* <Button>Reserve</Button> */}
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>

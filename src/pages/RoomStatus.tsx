@@ -19,6 +19,7 @@ export default function RoomStatus() {
       <Box
         sx={{
           flexGrow: 1,
+          minWidth: 320,
           '#expend-icon': {
             rect: {
               transition: 'width 1s ease'
