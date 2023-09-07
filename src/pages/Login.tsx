@@ -105,7 +105,7 @@ function Login() {
 const StyleWrapper = styled('main')(({ theme }) => ({
   background: `linear-gradient(45deg, #6c63ff 0%, ${theme.palette.primary.lighter} 80%)`,
   width: '100vw',
-  height: '100vh',
+  minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
