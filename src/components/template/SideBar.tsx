@@ -25,8 +25,8 @@ const ROUTE_ICON_MAPPING: Record<string, ReactNode> = {
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean
-  drawerWidth: number
-}>(({ theme, open, drawerWidth }) => ({
+  drawerwidth: number
+}>(({ theme, open, drawerwidth }) => ({
   p: 3,
   display: 'flex',
   flexDirection: 'column',
@@ -37,7 +37,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   }),
-  marginLeft: -drawerWidth,
+  marginLeft: -drawerwidth,
   ...(open && {
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
@@ -108,7 +108,7 @@ export default function SideBar({
           ))}
         </List>
       </Drawer>
-      <Main open={open} drawerWidth={drawerWidth}>
+      <Main open={open} drawerwidth={drawerWidth}>
         <Toolbar />
         {RouteConfig[selectedId]?.pageTitle ? (
           <Typography variant="h4" sx={{ marginBottom: 2 }}>
