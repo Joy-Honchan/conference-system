@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Paper,
-  Stack,
   TextField,
   styled,
   Typography,
@@ -57,45 +56,47 @@ function Login() {
         <Box className="meetingPic-container">
           <img src={meetingPic} alt="meeting" />
         </Box>
-        <Paper className="input-section">
-          <Stack component="form" spacing={6} onSubmit={formik.handleSubmit}>
-            <Box>
-              <Typography variant="h5" className="app-title">
-                Conference System
-              </Typography>
-              <Divider />
-            </Box>
-            <TextField
-              id="username"
-              label="Username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              error={!!formik.errors.username}
-              helperText={formik.errors.username}
-            />
-            <TextField
-              id="password"
-              label="Password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={!!formik.errors.password}
-              helperText={formik.errors.password}
-            />
-            <Box className="login-btn-container">
-              <Button
-                disabled={isLoading}
-                variant="contained"
-                color="primary"
-                className="login-btn"
-                type="submit"
-                startIcon={isLoading ? <HourglassEmptyIcon /> : null}
-              >
-                Login
-              </Button>
-              <Button onClick={handleShow}>Show Data</Button>
-            </Box>
-          </Stack>
+        <Paper
+          component="form"
+          className="input-section"
+          onSubmit={formik.handleSubmit}
+        >
+          <Box>
+            <Typography variant="h5" className="app-title">
+              Conference System
+            </Typography>
+            <Divider />
+          </Box>
+          <TextField
+            id="username"
+            label="Username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            error={!!formik.errors.username}
+            helperText={formik.errors.username}
+          />
+          <TextField
+            id="password"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            error={!!formik.errors.password}
+            helperText={formik.errors.password}
+          />
+          <Box className="login-btn-container">
+            <Button
+              disabled={isLoading}
+              variant="contained"
+              color="primary"
+              className="login-btn"
+              type="submit"
+              startIcon={isLoading ? <HourglassEmptyIcon /> : null}
+            >
+              Login
+            </Button>
+            <Button onClick={handleShow}>Show Data</Button>
+          </Box>
         </Paper>
       </Paper>
     </StyleWrapper>
@@ -104,47 +105,44 @@ function Login() {
 
 const StyleWrapper = styled('main')(({ theme }) => ({
   background: `linear-gradient(45deg, #6c63ff 0%, ${theme.palette.primary.lighter} 80%)`,
-  width: '100vw',
   minHeight: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: 'grid',
+  placeItems: 'center',
   '.center-paper': {
-    background: 'rgb(255,255,255)',
-    flex: '1 0 330px',
-    display: 'flex',
-    margin: theme.spacing(8),
-    maxWidth: 1300,
-    height: 600,
+    minHeight: 500,
+    margin: theme.spacing(5),
+    display: 'grid',
+    gridTemplateColumns: '1fr minmax(300px,350px)',
     '.meetingPic-container': {
-      display: 'flex',
-      alignItems: 'center',
-      flexGrow: 1,
-      padding: theme.spacing(6),
+      display: 'grid',
+      placeItems: 'center',
+      padding: theme.spacing(5),
       img: {
-        width: '100%'
+        maxWidth: '100%',
+        height: 'auto'
       }
     },
     '.input-section': {
       background: `linear-gradient(225deg, #6c63ff60 0%, ${theme.palette.primary.lighter}60 80%)`,
-      flex: '1 0 330px',
-      padding: `${theme.spacing(15)} ${theme.spacing(5)}`,
-      '.app-title': {
-        marginBottom: theme.spacing(1)
+      padding: `${theme.spacing(5)} ${theme.spacing(5)}`,
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexWrap: 'wrap',
+      div: {
+        width: '100%'
       },
       '.login-btn-container': {
-        textAlign: 'center',
-        '.login-btn': {
-          color: theme.palette.text.contrast,
-          marginRight: theme.spacing(1)
-        }
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignSelf: 'baseline'
       }
     }
   },
-  [theme.breakpoints.down('lg')]: {
+
+  [theme.breakpoints.down('md')]: {
     '.center-paper': {
-      display: 'flex',
-      maxWidth: `calc(250px + ${theme.spacing(10)})`,
+      margin: theme.spacing(2),
+      gridTemplateColumns: 'minmax(300px,350px)',
       '.meetingPic-container': {
         display: 'none'
       }
