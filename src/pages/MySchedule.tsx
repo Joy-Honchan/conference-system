@@ -83,7 +83,7 @@ export default function MySchedule() {
 
   return (
     <Grid container>
-      <Grid item lg={5} md={12}>
+      <Grid item lg={5} md={12} sm={12} xs={12}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar
             views={['day']}
@@ -101,7 +101,7 @@ export default function MySchedule() {
           />
         </LocalizationProvider>
       </Grid>
-      <Grid item lg={7} md={12}>
+      <Grid item lg={7} md={12} sm={12} xs={12}>
         <Card sx={{ p: 2 }}>
           <CardHeader title={selectDay.format('YYYY-MM-DD')} />
           <Divider />
@@ -112,35 +112,35 @@ export default function MySchedule() {
                   display="grid"
                   gridTemplateColumns={'max-content 1fr'}
                   sx={{
-                    '.MuiBox-root': {
-                      marginBottom: 1
-                    },
                     '.MuiTypography-root': {
-                      marginRight: 1
+                      marginRight: 2,
+                      marginBottom: 1
                     }
                   }}
                 >
-                  <Typography>Title:</Typography>
-                  <Box>
+                  <Typography variant="h6">Title:</Typography>
+                  <Typography variant="h6">
                     {SCHEDULE_DATA[selectDay.day()].meeting[0].title ||
                       'Untitled Meeting'}
-                  </Box>
-                  <Typography>Time:</Typography>
-                  <Box>
+                  </Typography>
+                  <Typography variant="h6">Time:</Typography>
+                  <Typography variant="h6">
                     {SCHEDULE_DATA[selectDay.day()].meeting[0].startTime ||
                       '08:30'}
                     -
                     {SCHEDULE_DATA[selectDay.day()].meeting[0].endTime ||
                       '10:30'}
-                  </Box>
-                  <Typography>Participants:</Typography>
-                  <Box>
+                  </Typography>
+                  <Typography variant="h6">Participants:</Typography>
+                  <Typography variant="h6">
                     {SCHEDULE_DATA[
                       selectDay.day()
                     ].meeting[0].participants?.join(', ') || 'No participants'}
-                  </Box>
+                  </Typography>
                 </Box>
-                <Typography sx={{ marginBottom: 1 }}>Quick Note:</Typography>
+                <Typography variant="h6" sx={{ marginBottom: 1 }}>
+                  Quick Note:
+                </Typography>
                 <NoteTextField timeString={timeString} />
               </>
             ) : (
