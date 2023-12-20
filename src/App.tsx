@@ -1,56 +1,58 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
   useRoutes,
-  useNavigate
-} from 'react-router-dom'
-import RouteConfig from 'configs/route'
-import TemplatWithNavebar from 'components/template'
+  useNavigate,
+} from "react-router-dom";
+import RouteConfig from "configs/route";
+import TemplatWithNavebar from "components/template";
 
 //ThemeProvider
-import ThemeProvider from 'providers/ThemeProvider'
+import ThemeProvider from "providers/ThemeProvider";
 //NotistackProvider
-import NotistackProvider from 'providers/NotistackProvider'
+import NotistackProvider from "providers/NotistackProvider";
 //Redux
-import { Provider } from 'react-redux'
-import store from 'store'
+import { Provider } from "react-redux";
+import store from "store";
 
-import NoteProvider from 'providers/NoteContext'
+import NoteProvider from "providers/NoteContext";
 
-const Login = lazy(() => import('pages/Login'))
+const Login = lazy(() => import("pages/Login"));
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: '*',
-      element: <InnerRouter />
+      path: "*",
+      element: <InnerRouter />,
     },
     {
-      path: 'login',
-      element: <Login />
-    }
-  ])
+      path: "login",
+      element: <Login />,
+    },
+  ]);
   return (
     <ThemeProvider>
-      <NotistackProvider>
-        <NoteProvider>
-          <Suspense fallback={<div>Loading...</div>}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </NoteProvider>
-      </NotistackProvider>
+      <Provider store={store}>
+        {/* <NotistackProvider> */}
+        {/* <NoteProvider> */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <RouterProvider router={router} />
+        </Suspense>
+        {/* </NoteProvider> */}
+        {/* </NotistackProvider> */}
+      </Provider>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
 
 const InnerRouter = () => {
-  const routes = useRoutes(RouteConfig)
+  const routes = useRoutes(RouteConfig);
   return (
     <TemplatWithNavebar>
       <Suspense fallback={<div>Loading...</div>}>{routes}</Suspense>
     </TemplatWithNavebar>
-  )
-}
+  );
+};

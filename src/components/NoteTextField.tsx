@@ -1,37 +1,43 @@
-import { useState, useContext, useEffect, useMemo } from 'react'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
+import { useState, useContext, useEffect, useMemo } from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-import { NoteContext } from 'providers/NoteContext'
+import { useAppSelector, useAppDispatch } from "hooks/reduxHooks";
+import { addNote } from "store/slices/noteSlice";
+
+// import { NoteContext } from 'providers/NoteContext'
 
 const NoteTextField = ({ timeString }: { timeString: string }) => {
-  const { notes, handleNotes } = useContext(NoteContext)
-  const initValue = useMemo(() => notes[timeString] || '', [notes, timeString])
-  const [text, setText] = useState(initValue)
-  const [isEditing, setIsEditing] = useState(false)
+  // const { notes, handleNotes } = useContext(NoteContext)
+  const notes = useAppSelector((state) => state.note);
+  const dispatch = useAppDispatch();
+  const initValue = useMemo(() => notes[timeString] || "", [notes, timeString]);
+  const [text, setText] = useState(initValue);
+  const [isEditing, setIsEditing] = useState(false);
   const handleEdit = () => {
-    setIsEditing(true)
-  }
+    setIsEditing(true);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value)
-  }
+    setText(e.target.value);
+  };
   const handleSave = () => {
-    handleNotes(timeString, text)
-    setIsEditing(false)
-  }
+    // handleNotes(timeString, text)
+    dispatch(addNote({ time: timeString, note: text }));
+    setIsEditing(false);
+  };
 
   const handleCancel = () => {
-    setText(initValue)
-    setIsEditing(false)
-  }
+    setText(initValue);
+    setIsEditing(false);
+  };
 
   useEffect(() => {
-    setIsEditing(false)
-    setText(initValue)
-  }, [initValue, timeString])
+    setIsEditing(false);
+    setText(initValue);
+  }, [initValue, timeString]);
 
   return (
     <Box>
@@ -52,7 +58,7 @@ const NoteTextField = ({ timeString }: { timeString: string }) => {
       </Box>
       <Box
         sx={{
-          textAlign: 'end'
+          textAlign: "end",
         }}
       >
         {isEditing ? (
@@ -75,7 +81,7 @@ const NoteTextField = ({ timeString }: { timeString: string }) => {
         )}
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default NoteTextField
+export default NoteTextField;
